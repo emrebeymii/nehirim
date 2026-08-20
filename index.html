@@ -18,6 +18,7 @@
   *{margin:0;padding:0;box-sizing:border-box;}
   html,body{
     height:100%;
+    height:100dvh;
     width:100%;
     overflow:hidden;
     background:var(--ink);
@@ -79,6 +80,10 @@
     position:relative; z-index:5; height:100vh; height:100dvh; width:100%;
     display:flex; flex-direction:column; justify-content:space-between;
     padding:32px clamp(20px,5vw,64px);
+    padding-top:max(32px, env(safe-area-inset-top));
+    padding-left:max(clamp(20px,5vw,64px), env(safe-area-inset-left));
+    padding-right:max(clamp(20px,5vw,64px), env(safe-area-inset-right));
+    padding-bottom:max(32px, env(safe-area-inset-bottom));
   }
 
   header{
@@ -186,9 +191,33 @@
   .btn-ghost:hover{ transform:translateY(-2px); background:var(--ivory); }
 
   @media (max-width:640px){
-    .glass-card{ left:20px; right:20px; width:auto; bottom:20px; }
-    .page{ padding:24px 20px; }
-    .headline{ font-size:clamp(2.3rem,10vw,3.2rem); }
+    .page{
+      padding:20px 20px;
+      padding-top:max(20px, env(safe-area-inset-top));
+      padding-bottom:max(148px, calc(148px + env(safe-area-inset-bottom)));
+    }
+    .headline{ font-size:clamp(2.1rem,9.5vw,2.9rem); line-height:1.12; }
+    .hero-copy{ margin-top:20px; font-size:0.96rem; line-height:1.7; }
+    .cta-row{ margin-top:26px; }
+    .btn-primary{ padding:14px 30px; font-size:0.86rem; width:100%; text-align:center; }
+    main{ max-width:100%; }
+    .logo{ font-size:0.95rem; }
+
+    .glass-card{
+      left:16px; right:16px; width:auto; bottom:16px;
+      bottom:max(16px, env(safe-area-inset-bottom));
+      display:flex; align-items:center; gap:14px; padding:12px;
+    }
+    .glass-thumb{ width:56px; height:56px; flex:0 0 56px; aspect-ratio:auto; border-radius:12px; }
+    .glass-card .gc-title{ margin-top:0; font-size:0.88rem; }
+    .glass-card .gc-row{ margin-top:4px; }
+    .glass-card > .gc-info{ flex:1; min-width:0; }
+  }
+  @media (max-height:680px) and (max-width:640px){
+    .headline{ font-size:clamp(1.85rem,9vw,2.4rem); }
+    .hero-copy{ margin-top:14px; }
+    .cta-row{ margin-top:18px; }
+    header{ margin-bottom:0; }
   }
 
   @keyframes fadeIn{ to{ opacity:1; } }
@@ -256,10 +285,12 @@
 
 <div class="glass-card">
   <div class="glass-thumb"></div>
-  <div class="gc-title">Küçük Bir Sürpriz</div>
-  <div class="gc-row">
-    <span class="gc-sub">Senin için</span>
-    <a class="btn-ghost" href="#">Aç</a>
+  <div class="gc-info">
+    <div class="gc-title">Küçük Bir Sürpriz</div>
+    <div class="gc-row">
+      <span class="gc-sub">Senin için</span>
+      <a class="btn-ghost" href="#">Aç</a>
+    </div>
   </div>
 </div>
 
